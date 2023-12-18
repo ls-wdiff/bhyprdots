@@ -61,3 +61,26 @@ Install powerlevel10k
 `git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k`
 
 reboot. with polkit now active, use vivaldi and thunar to finish the job.
+
+
+POST INSTALL
+
+`git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting`
+
+`git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions`
+
+```
+Download https://www.gnome-look.org/p/1329022
+extract
+sudo cp (xxxx) /usr/share/themes
+
+Download https://www.bibata.live/studio
+extract
+replace X_cursor with default
+sudo cp (xxxx) /usr/share/icons
+
+cd /etc/usr/share/icons/default
+change to (xxxx)-cursor
+```
+
+
