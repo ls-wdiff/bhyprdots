@@ -1,37 +1,59 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-if [[ -z "${WAYLAND_DISPLAY}" ]] && [[ "${XDG_VTNR}" = "1" ]]; then
-  exec dbus-run-session Hyprland
-fi
 
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
 export ZSH="$HOME/.config/.oh-my-zsh"
+export EDITOR='micro'
+export PAGER='bat'
+
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-export ZSH_CUSTOM=${~/.config/.oh-my-zsh/custom/}
-export SUDO_PROMPT="AUTH: "
-export EDITOR="nvim"
+
+ZSH_CUSTOM=~/.config/.zc/
+
 
 plugins=(
-  git
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-  sudo
-  )
+		git
+		sudo
+		zsh-syntax-highlighting
+		zsh-autosuggestions
+)
 
 source $ZSH/oh-my-zsh.sh
 
-alias zrc="nvim ~/.zshrc"
-alias hrc="nvim ~/.config/hypr/hyprland.conf"
-alias krc="nvim ~/.config/kitty/kitty.conf"
-alias lswp="cd ~/Photos/Wallpapers/"
-alias c="clear"
-alias s="paruz"
+alias v="micro "
+alias sin="pacman -Qqe | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
+alias zrc="micro ~/.zshrc"
+alias hrc="micro ~/.config/hypr/hyprland.conf"
+alias krc="micro ~/.config/kitty/kitty.conf"
+alias wrc="cd ~/.config/waybar"
+alias ls="eza -Falh --icons --group-directories-first "
+alias ll="eza -Fa --icons "
 alias S="paru -S --noconfirm"
-alias v="nvim"
-alias ls="eza -Fal --icons --group-directories-first"
-alias syu="sudo pacman -Sy && sudo powerpill -Su && paru -Su"
+alias s="paruz"
+alias syu="sudo pacman -Sy && paru -Su"
+alias x="ranger-cd"
+alias t="theme.sh"
 
+
+ranger-cd() {
+    ~/.config/ranger/quitcd.sh
+    LASTD=`cat "$HOME/.config/ranger/lastd"`
+    [[ -d "$LASTD" ]] && cd "$LASTD"
+}
+
+chpwd() ls
+
+
+chpwd() ls
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
